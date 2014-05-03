@@ -10,7 +10,8 @@ from django.utils import six
 
 register = Library()
 
-def strToBool(val):
+
+def str_to_bool(val):
     """
     Helper function to turn a string representation of "true" into
     boolean True.
@@ -18,7 +19,8 @@ def strToBool(val):
     return val.lower() == "true"
 
 
-def get_page_url(page_num, current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params):
+def get_page_url(page_num, current_app, url_view_name,
+                 url_extra_args, url_extra_kwargs, url_param_name, url_get_params):
     """
     Helper function to return a valid URL string given the template tag parameters
     """
@@ -32,7 +34,8 @@ def get_page_url(page_num, current_app, url_view_name, url_extra_args, url_extra
         except NoReverseMatch as e:
             if settings.SETTINGS_MODULE:
                 project_name = settings.SETTINGS_MODULE.split('.')[0]
-                url = reverse(project_name + '.' + url_view_name, args=url_extra_args, kwargs=url_extra_kwargs, current_app=current_app)
+                url = reverse(project_name + '.' + url_view_name, args=url_extra_args,
+                              kwargs=url_extra_kwargs, current_app=current_app)
             else:
                 raise e
 
@@ -82,11 +85,13 @@ class BootstrapPagerNode(Node):
 
         previous_page_url = None
         if page.has_previous():
-            previous_page_url = get_page_url(page.previous_page_number(), context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            previous_page_url = get_page_url(page.previous_page_number(), context.current_app, url_view_name,
+                                             url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
 
         next_page_url = None
         if page.has_next():
-            next_page_url = get_page_url(page.next_page_number(), context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            next_page_url = get_page_url(page.next_page_number(), context.current_app, url_view_name, url_extra_args,
+                                         url_extra_kwargs, url_param_name, url_get_params)
 
         return get_template("bootstrap_pagination/pager.html").render(
             Context({
@@ -132,10 +137,10 @@ class BootstrapPaginationNode(Node):
             if size not in ["small", "large"]:
                 raise Exception("Optional argument \"size\" expecting one of \"small\", or \"large\"")
 
-        show_prev_next = strToBool(kwargs.get("show_prev_next", "true"))
+        show_prev_next = str_to_bool(kwargs.get("show_prev_next", "true"))
         previous_label = six.binary_type(kwargs.get("previous_label", "&larr;"))
         next_label = six.binary_type(kwargs.get("next_label", "&rarr;"))
-        show_first_last = strToBool(kwargs.get("show_first_last", "false"))
+        show_first_last = str_to_bool(kwargs.get("show_first_last", "false"))
         first_label = six.binary_type(kwargs.get("first_label", "&laquo;"))
         last_label = six.binary_type(kwargs.get("last_label", "&raquo;"))
 
@@ -172,29 +177,34 @@ class BootstrapPaginationNode(Node):
                 else:
                     range_max += shift
 
-        page_range = range(range_min, range_max + 1)
+        page_range = (range_min, range_max + 1)
 
         # Generate our URLs (page range + special urls for first, previous, next, and last)
         page_urls = []
         for curpage in page_range:
-            url = get_page_url(curpage, context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            url = get_page_url(curpage, context.current_app, url_view_name, url_extra_args,
+                               url_extra_kwargs, url_param_name, url_get_params)
             page_urls.append((curpage, url))
 
         first_page_url = None
         if current_page >= 1:
-            first_page_url = get_page_url(1, context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            first_page_url = get_page_url(1, context.current_app, url_view_name, url_extra_args,
+                                          url_extra_kwargs, url_param_name, url_get_params)
 
         last_page_url = None
         if current_page <= page_count:
-            last_page_url = get_page_url(page_count, context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            last_page_url = get_page_url(page_count, context.current_app, url_view_name, url_extra_args,
+                                         url_extra_kwargs, url_param_name, url_get_params)
 
         previous_page_url = None
         if page.has_previous():
-            previous_page_url = get_page_url(page.previous_page_number(), context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            previous_page_url = get_page_url(page.previous_page_number(), context.current_app, url_view_name,
+                                             url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
 
         next_page_url = None
         if page.has_next():
-            next_page_url = get_page_url(page.next_page_number(), context.current_app, url_view_name, url_extra_args, url_extra_kwargs, url_param_name, url_get_params)
+            next_page_url = get_page_url(page.next_page_number(), context.current_app, url_view_name, url_extra_args,
+                                         url_extra_kwargs, url_param_name, url_get_params)
 
         return get_template("bootstrap_pagination/pagination.html").render(
             Context({
