@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals, absolute_import
 import re
-
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.template import Context, Node, Library, TemplateSyntaxError, VariableDoesNotExist
 from django.template.loader import get_template
 from django.conf import settings
 from django.http import QueryDict
+from django.utils import six
 
 register = Library()
-
 
 def strToBool(val):
     """
@@ -41,7 +42,7 @@ def get_page_url(page_num, current_app, url_view_name, url_extra_args, url_extra
         url_get_params = url_get_params.copy()
         url_get_params[url_param_name] = page_num
 
-    if (len(url_get_params) > 0):
+    if len(url_get_params) > 0:
         url += '?' + url_get_params.urlencode()
 
     return url
@@ -65,16 +66,16 @@ class BootstrapPagerNode(Node):
             except VariableDoesNotExist:
                 kwargs[argname] = None
 
-        previous_label = str(kwargs.get("previous_label", "Previous Page"))
-        next_label = str(kwargs.get("next_label", "Next Page"))
-        previous_title = str(kwargs.get("previous_title", "Previous Page"))
-        next_title = str(kwargs.get("next_title", "Next Page"))
+        previous_label = six.binary_type(kwargs.get("previous_label", "Previous Page"))
+        next_label = six.binary_type(kwargs.get("next_label", "Next Page"))
+        previous_title = six.binary_type(kwargs.get("previous_title", "Previous Page"))
+        next_title = six.binary_type(kwargs.get("next_title", "Next Page"))
 
         url_view_name = kwargs.get("url_view_name", None)
         if url_view_name is not None:
-            url_view_name = str(url_view_name)
+            url_view_name = six.binary_type(url_view_name)
 
-        url_param_name = str(kwargs.get("url_param_name", "page"))
+        url_param_name = six.binary_type(kwargs.get("url_param_name", "page"))
         url_extra_args = kwargs.get("url_extra_args", [])
         url_extra_kwargs = kwargs.get("url_extra_kwargs", {})
         url_get_params = kwargs.get("url_get_params", context['request'].GET)
@@ -123,26 +124,26 @@ class BootstrapPaginationNode(Node):
         # Unpack our keyword arguments, substituting defaults where necessary
         range_length = kwargs.get("range", None)
         if range_length is not None:
-            range_length = int(range_length)
+            range_length = six.integer_types(range_length)
 
         size = kwargs.get("size", None)
         if size is not None:
-            size = str(size.lower())
+            size = six.binary_type(size.lower())
             if size not in ["small", "large"]:
                 raise Exception("Optional argument \"size\" expecting one of \"small\", or \"large\"")
 
         show_prev_next = strToBool(kwargs.get("show_prev_next", "true"))
-        previous_label = str(kwargs.get("previous_label", "&larr;"))
-        next_label = str(kwargs.get("next_label", "&rarr;"))
+        previous_label = six.binary_type(kwargs.get("previous_label", "&larr;"))
+        next_label = six.binary_type(kwargs.get("next_label", "&rarr;"))
         show_first_last = strToBool(kwargs.get("show_first_last", "false"))
-        first_label = str(kwargs.get("first_label", "&laquo;"))
-        last_label = str(kwargs.get("last_label", "&raquo;"))
+        first_label = six.binary_type(kwargs.get("first_label", "&laquo;"))
+        last_label = six.binary_type(kwargs.get("last_label", "&raquo;"))
 
         url_view_name = kwargs.get("url_view_name", None)
         if url_view_name is not None:
-            url_view_name = str(url_view_name)
+            url_view_name = six.binary_type(url_view_name)
 
-        url_param_name = str(kwargs.get("url_param_name", "page"))
+        url_param_name = six.binary_type(kwargs.get("url_param_name", "page"))
         url_extra_args = kwargs.get("url_extra_args", [])
         url_extra_kwargs = kwargs.get("url_extra_kwargs", {})
         url_get_params = kwargs.get("url_get_params", context['request'].GET)
