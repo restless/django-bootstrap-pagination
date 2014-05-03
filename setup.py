@@ -8,7 +8,7 @@ readme.close()
 
 setup(
     name='django-bootstrap-pagination',
-    version='1.5.0',
+    version='1.6.0-dev',
     keywords="django bootstrap pagination templatetag",
     author=u'Jason McClellan',
     author_email='jason@jasonmccllelan.net',
@@ -23,6 +23,9 @@ setup(
         "Development Status :: 3 - Alpha",
         "Framework :: Django",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",        
+        "License :: OSI Approved :: MIT License",
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.3',
     ]
 )
