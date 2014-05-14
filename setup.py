@@ -2,7 +2,7 @@
 from distutils.core import setup
 from setuptools import find_packages
 
-readme = open('README.rst', encoding='utf-8')
+readme = open('README.rst')
 readme_text = readme.read()
 readme.close()
 
