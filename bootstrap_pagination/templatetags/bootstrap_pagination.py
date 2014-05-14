@@ -129,7 +129,7 @@ class BootstrapPaginationNode(Node):
         # Unpack our keyword arguments, substituting defaults where necessary
         range_length = kwargs.get("range", None)
         if range_length is not None:
-            range_length = six.integer_types(range_length)
+            range_length = int(range_length)
 
         size = kwargs.get("size", None)
         if size is not None:
