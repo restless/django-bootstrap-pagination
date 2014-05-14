@@ -177,7 +177,7 @@ class BootstrapPaginationNode(Node):
                 else:
                     range_max += shift
 
-        page_range = (range_min, range_max + 1)
+        page_range = range(range_min, range_max + 1)
 
         # Generate our URLs (page range + special urls for first, previous, next, and last)
         page_urls = []
