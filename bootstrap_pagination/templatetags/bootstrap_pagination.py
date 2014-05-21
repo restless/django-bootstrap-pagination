@@ -69,16 +69,16 @@ class BootstrapPagerNode(Node):
             except VariableDoesNotExist:
                 kwargs[argname] = None
 
-        previous_label = six.binary_type(kwargs.get("previous_label", "Previous Page"))
-        next_label = six.binary_type(kwargs.get("next_label", "Next Page"))
-        previous_title = six.binary_type(kwargs.get("previous_title", "Previous Page"))
-        next_title = six.binary_type(kwargs.get("next_title", "Next Page"))
+        previous_label = kwargs.get("previous_label", "Previous Page")
+        next_label = kwargs.get("next_label", "Next Page")
+        previous_title = kwargs.get("previous_title", "Previous Page")
+        next_title = kwargs.get("next_title", "Next Page")
 
         url_view_name = kwargs.get("url_view_name", None)
         if url_view_name is not None:
-            url_view_name = six.binary_type(url_view_name)
+            url_view_name = url_view_name
 
-        url_param_name = six.binary_type(kwargs.get("url_param_name", "page"))
+        url_param_name = kwargs.get("url_param_name", "page")
         url_extra_args = kwargs.get("url_extra_args", [])
         url_extra_kwargs = kwargs.get("url_extra_kwargs", {})
         url_get_params = kwargs.get("url_get_params", context['request'].GET)
@@ -133,22 +133,22 @@ class BootstrapPaginationNode(Node):
 
         size = kwargs.get("size", None)
         if size is not None:
-            size = six.binary_type(size.lower())
+            size = size.lower()
             if size not in ["small", "large"]:
                 raise Exception("Optional argument \"size\" expecting one of \"small\", or \"large\"")
 
         show_prev_next = str_to_bool(kwargs.get("show_prev_next", "true"))
-        previous_label = six.binary_type(kwargs.get("previous_label", "&larr;"))
-        next_label = six.binary_type(kwargs.get("next_label", "&rarr;"))
+        previous_label = kwargs.get("previous_label", "&larr;")
+        next_label = kwargs.get("next_label", "&rarr;")
         show_first_last = str_to_bool(kwargs.get("show_first_last", "false"))
-        first_label = six.binary_type(kwargs.get("first_label", "&laquo;"))
-        last_label = six.binary_type(kwargs.get("last_label", "&raquo;"))
+        first_label = kwargs.get("first_label", "&laquo;")
+        last_label = kwargs.get("last_label", "&raquo;")
 
         url_view_name = kwargs.get("url_view_name", None)
         if url_view_name is not None:
-            url_view_name = six.binary_type(url_view_name)
+            url_view_name = url_view_name
 
-        url_param_name = six.binary_type(kwargs.get("url_param_name", "page"))
+        url_param_name = kwargs.get("url_param_name", "page")
         url_extra_args = kwargs.get("url_extra_args", [])
         url_extra_kwargs = kwargs.get("url_extra_kwargs", {})
         url_get_params = kwargs.get("url_get_params", context['request'].GET)
