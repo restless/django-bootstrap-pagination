@@ -6,11 +6,13 @@ readme = open('README.rst')
 readme_text = readme.read()
 readme.close()
 
+version = __import__('bootstrap_pagination').__version__
+
 setup(
     name='django-bootstrap-pagination',
-    version='1.6.0-dev',
+    version=version,
     keywords="django bootstrap pagination templatetag",
-    author=u'Jason McClellan',
+    author='Jason McClellan',
     author_email='jason@jasonmccllelan.net',
     packages=find_packages(),
     url='https://github.com/jmcclell/django-bootstrap-pagination',
@@ -26,6 +28,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3',
     ]
 )
