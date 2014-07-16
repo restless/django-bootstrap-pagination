@@ -2,12 +2,12 @@ import io
 from distutils.core import setup
 from setuptools import find_packages
 
-readme = io.open('README.rst', encoding='utf-8')
-readme_text = readme.read()
-readme.close()
+#readme = io.open('README.rst', encoding='utf-8')
+#readme_text = readme.read()
+#readme.close()
 
 #version = __import__('bootstrap_pagination').__version__
-version = __import__('bootstrap_pagination').__version__
+version = '1.0'
 
 setup(
     name='django-bootstrap-pagination',
@@ -19,7 +19,7 @@ setup(
     url='https://github.com/jmcclell/django-bootstrap-pagination',
     license='MIT licence, see LICENCE',
     description='Render Django Page objects as Bootstrap 3.x Pagination compatible HTML',
-    long_description=readme_text,
+    #long_description=readme_text,
     zip_safe=False,
     include_package_data=True,
     classifiers=[
