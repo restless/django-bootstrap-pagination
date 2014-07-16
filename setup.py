@@ -1,10 +1,12 @@
+import io
 from distutils.core import setup
 from setuptools import find_packages
 
-readme = open('README.rst')
+readme = io.open('README.rst', encoding='utf-8')
 readme_text = readme.read()
 readme.close()
 
+#version = __import__('bootstrap_pagination').__version__
 version = __import__('bootstrap_pagination').__version__
 
 setup(
